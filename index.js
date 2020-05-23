@@ -28,8 +28,13 @@
 const myhttp = require(`http`);
 // const myUrl = require(`url`);
 const server = myhttp.createServer((req,res)=>{
-    console.log(req.url);
-    res.end(`---- http server created ----`);
+    const pathName = req.url;
+    if(pathName === `/` || pathName === `/overview`){
+        res.end(`this is the overview page\n---- & http server created ----`);
+    }
+    else if(pathName === `/product`){
+        res.end(`this is the product page\n---- & http server created ----`);
+    }
 });
 server.listen(8000,`127.0.0.1`,()=>{
    console.log(`---- Listening ----`);
