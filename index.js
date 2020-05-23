@@ -25,8 +25,10 @@
 // console.log(`is working on files....`);
 
 ///////////////// Http module /////////////////////////
-const http = require(`http`);
-const server = http.createServer((req,res)=>{
+const myhttp = require(`http`);
+// const myUrl = require(`url`);
+const server = myhttp.createServer((req,res)=>{
+    console.log(req.url);
     res.end(`---- http server created ----`);
 });
 server.listen(8000,`127.0.0.1`,()=>{
