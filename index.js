@@ -26,6 +26,7 @@
 
 ///////////////// Http module /////////////////////////
 const myhttp = require(`http`);
+const fs = require(`fs`);
 // const myUrl = require(`url`);
 const server = myhttp.createServer((req,res)=>{
     const pathName = req.url;
@@ -34,6 +35,21 @@ const server = myhttp.createServer((req,res)=>{
     }
     else if(pathName === `/product`){
         res.end(`this is the product page\n---- & http server created ----`);
+    }
+    else if(pathName === `/api`){
+        fs.readFile(`${__dirname}/dev-data/data.json`,`utf-8`,(err,data1)=>{
+            res.writeHead(200, {
+                "content-type" : `application/json`
+            });
+            res.end(data1);
+        });
+    }
+    else{
+        res.writeHead(404,{
+            "Content-type" : `text/html`,
+            "my-own-header" : `some bullshit, ha? :)`
+        })
+        res.end(`<h1>your requested page doesn't exist</h1>`);
     }
 });
 server.listen(8000,`127.0.0.1`,()=>{
